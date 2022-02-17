@@ -1,0 +1,18 @@
+Приложение генерирует код, на основе названия предприятия, ФИО сотрудника, даты рождения и должности. 
+QR-коды генерируются с помощью библиотеки QRGenerator (https://github.com/androidmads/QRGenerator). Подключен в gradle как указано в репозитории
+{
+implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
+implementation 'com.google.zxing:core:3.3.2'
+}
+
+Текст генерируется после нажатия кнопки «Generate» на экране. За генерацию кода отвечает метод generateQrCode
+{
+private fun generateQrCode(text: String){
+       val qrGenerator = QRGEncoder(text, null, QRGContents.Type.TEXT, 500)
+       try {
+         val bMap = qrGenerator.encodeAsBitmap()
+         im?.setImageBitmap(bMap)
+       } catch (e: WriterException){
+
+       }
+}
